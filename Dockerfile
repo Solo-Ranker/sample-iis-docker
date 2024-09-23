@@ -1,4 +1,4 @@
-# Stage 1: Build the application using .NET SDK 8.0
+# Stage 1: Build the .NET application using SDK 8.0
 FROM mcr.microsoft.com/dotnet/sdk:8.0-windowsservercore-ltsc2022 AS build-env
 WORKDIR /app
 
@@ -6,26 +6,22 @@ WORKDIR /app
 COPY *.csproj ./
 RUN dotnet restore
 
-# Copy the remaining files and build the application
+# Copy the rest of the files and build the application
 COPY . ./
 RUN dotnet publish -c Release -o out
 
-# Stage 2: Set up IIS and deploy the app
-FROM mcr.microsoft.com/dotnet/aspnet:8.0-windowsservercore-ltsc2022
+# Stage 2: Use IIS on Windows Server Core for hosting
+FROM mcr.microsoft.com/windows/servercore/iis:windowsservercore-ltsc2022
 WORKDIR /inetpub/wwwroot
 
-# Install IIS and ASP.NET
-RUN powershell -NoProfile -Command \
-    Install-WindowsFeature Web-Server; \
-    Install-WindowsFeature Web-Asp-Net45; \
-    Install-WindowsFeature Web-Net-Ext45; \
-    Remove-Item -Recurse C:\inetpub\wwwroot\*
+# Remove default IIS content
+RUN powershell Remove-Item -Recurse C:\inetpub\wwwroot\*
 
-# Copy the app from the build container
+# Copy the application from the build stage
 COPY --from=build-env /app/out .
 
-# Expose port 80 for IIS
+# Expose port 80 for HTTP traffic
 EXPOSE 80
 
-# Start IIS
+# Start IIS by default
 ENTRYPOINT ["C:\\ServiceMonitor.exe", "w3svc"]
