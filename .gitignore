@@ -63,3 +63,6 @@ npm-debug.log*
 
 # Mono Auto Generated Files
 mono_crash.*
+
+#output folder
+out/
