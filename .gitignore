@@ -1,0 +1,65 @@
+# Build directories
+bin/
+obj/
+
+# Rider project files
+.idea/
+
+# User-specific files
+.vscode/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# ASP.NET temporary files
+**/ASPNET/**
+
+# NuGet packages
+*.nupkg
+packages/
+
+# Rider-specific files
+.idea/
+*.DotSettings.user
+
+# Logs
+*.log
+
+# Visual Studio specific
+.vscode/
+.vs/
+
+# Auto-generated files by .NET
+project.lock.json
+project.fragment.lock.json
+
+# Resharper
+_ReSharper*/
+
+# Web-related
+wwwroot/node_modules/
+node_modules/
+npm-debug.log*
+
+# Include certificates (comment out if needed)
+*.pfx
+*.p12
+
+# Rider's solution-wide analysis caches
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/dictionaries
+.idea/vcs.xml
+.idea/jsLibraryMappings.xml
+.idea/modules.xml
+.idea/.idea_modules.xml
+.idea/gradle.xml
+.idea/libraries
+.idea/assetWizard.xml
+
+# Optional: Rider folder for generated launch configurations
+.idea/runConfigurations/
+
+# Mono Auto Generated Files
+mono_crash.*
